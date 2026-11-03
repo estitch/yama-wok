@@ -1,0 +1,68 @@
+/* ==========================================================================
+   responsive.css — Puntos de ruptura (Mobile First: solo se amplía hacia arriba)
+   Móvil: 2 columnas (definido en styles.css) ·  ≥600px: 3 ·  ≥900px: 4 ·  ≥1200px: 5
+   ========================================================================== */
+
+/* Móviles muy estrechos (≤ 340px): compactar ligeramente */
+@media (max-width: 340px) {
+  :root { --gutter: 8px; }
+  .card-title { font-size: .88rem; }
+  .card-desc { font-size: .74rem; }
+  .btn-add { padding: 0 9px; font-size: .78rem; }
+  .og-opts { grid-template-columns: 1fr; }
+  .hero-mascot { width: 66px; }
+}
+
+/* Teléfonos grandes / tablets pequeñas */
+@media (min-width: 600px) {
+  :root { --gutter: 16px; --nav-h: 112px; }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .hero { padding: 22px var(--gutter) 24px; }
+  .grid.single .card { grid-column: span 2; }
+  .staff-hero { padding: 12px 130px 12px var(--gutter); }
+  .hero-mascot { width: 120px; }
+  .hero-logo { width: 280px; }
+  .hero-desc { font-size: 1rem; }
+  .cat-title { font-size: 1.6rem; }
+  .card-title { font-size: 1rem; }
+  .card-desc { font-size: .84rem; }
+  .modal { align-items: center; padding: 20px; }
+  .sheet { border-radius: 22px; max-height: 90vh; max-height: 90dvh; }
+  .og-opts.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Tablets horizontales / portátiles */
+@media (min-width: 900px) {
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cat-nav-inner { display: flex; align-items: center; gap: 12px; padding: 0 var(--gutter); }
+  .search { margin: 0; flex: 0 0 210px; }
+  .chips { padding: 2px 0; flex: 1; flex-wrap: wrap; overflow: visible; gap: 6px; }
+  .chip { padding: 0 11px; font-size: .85rem; }
+  :root { --nav-h: 64px; }
+  .cat-nav { padding: 10px 0; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+}
+
+/* Monitores de escritorio */
+@media (min-width: 1200px) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .menu, .footer, .hero-inner, .hero-contact, .cat-nav-inner { max-width: 1240px; }
+}
+
+/* Hover solo en dispositivos que lo soportan */
+@media (hover: none) {
+  .card:hover { transform: none; box-shadow: var(--shadow-sm); }
+}
+
+/* Pantallas bajas en horizontal */
+@media (max-height: 480px) and (orientation: landscape) {
+  .sheet { max-height: 98vh; max-height: 98dvh; }
+  .hero-mascot { display: none; }
+  .cart-panel { max-width: 380px; }
+}
+
+/* Mesera: en pantallas anchas, acciones en fila */
+@media (min-width: 600px) {
+  .scan-actions, .ticket-actions { grid-template-columns: repeat(2, 1fr); }
+  .staff-hero .hero-logo { width: 150px; }
+}

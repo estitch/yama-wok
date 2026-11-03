@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Yama Wok · Carta digital</title>
+  <meta name="description" content="Carta digital de Yama Wok — Fast Nikkei. Arma tu pedido y genera tu código QR.">
+  <meta name="theme-color" content="#d20824">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#menu" data-i18n="a11y.skip">Ir a la carta</a>
+
+  <noscript>
+    <div class="noscript">Esta carta necesita JavaScript para funcionar. / This menu needs JavaScript to work.</div>
+  </noscript>
+
+  <!-- Cabecera: logotipo, descripción y contacto (se construye desde js/config.js) -->
+  <header class="hero" id="hero"></header>
+
+  <!-- Navegación por categorías + buscador -->
+  <nav class="cat-nav" id="cat-nav" data-i18n-attr="aria-label:nav.label" aria-label="Categorías de la carta">
+    <div class="cat-nav-inner">
+      <div class="search" role="search">
+        <span class="icon-search" data-icon="search" data-size="18"></span>
+        <label class="sr-only" for="search" data-i18n="search.label">Buscar un producto</label>
+        <input id="search" type="search" autocomplete="off" enterkeyhint="search" placeholder="Buscar en la carta…" data-i18n-attr="placeholder:search.placeholder">
+        <button type="button" class="search-clear" id="search-clear" data-i18n-attr="aria-label:search.clear" aria-label="Borrar búsqueda"><span data-icon="x" data-size="18"></span></button>
+      </div>
+      <div class="chips" id="chips" role="group" data-i18n-attr="aria-label:nav.label" aria-label="Categorías de la carta"></div>
+    </div>
+  </nav>
+
+  <!-- La carta se genera dinámicamente desde js/menu-data.js -->
+  <main class="menu" id="menu" tabindex="-1"></main>
+
+  <footer class="footer" id="footer"></footer>
+
+  <!-- Botón flotante del pedido -->
+  <button type="button" class="fab" id="cart-fab" data-action="open-cart" data-count="0" aria-label="Ver mi pedido" aria-haspopup="dialog">
+    <span class="fab-icon"><span data-icon="shopping-bag" data-size="26"></span><span class="fab-count" data-n="0">0</span></span>
+    <span class="fab-total"></span>
+  </button>
+
+  <!-- Panel lateral derecho: pedido -->
+  <div class="backdrop" id="cart-backdrop"></div>
+  <aside class="cart-panel" id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
+    <div class="panel-head">
+      <div>
+        <h2 id="cart-title"><span data-icon="shopping-bag" data-size="22"></span><span data-i18n="cart.title">Mi pedido</span></h2>
+        <div class="panel-sub" id="cart-sub"></div>
+      </div>
+      <button type="button" class="icon-btn" id="cart-close" data-action="close-cart" data-i18n-attr="aria-label:cart.close" aria-label="Cerrar pedido"><span data-icon="x" data-size="22"></span></button>
+    </div>
+    <div class="cart-body" id="cart-body"></div>
+    <div class="cart-foot" id="cart-foot" hidden></div>
+  </aside>
+
+  <!-- Modales (su contenido se genera por JavaScript) -->
+  <div class="modal" id="options-modal" aria-hidden="true"></div>
+  <div class="modal" id="qr-modal" aria-hidden="true"></div>
+  <div class="modal dialog" id="confirm-modal" aria-hidden="true"></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Configuración y datos -->
+  <script src="js/config.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/icons.js" defer></script>
+  <script src="js/menu-data.js" defer></script>
+  <!-- Librería QR local: qrcode-generator 1.4.4 (MIT) -->
+  <script src="js/vendor/qrcode.js" defer></script>
+  <!-- Lógica -->
+  <script src="js/cart.js" defer></script>
+  <script src="js/order-qr.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

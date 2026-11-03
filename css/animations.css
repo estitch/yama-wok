@@ -1,0 +1,104 @@
+/* ==========================================================================
+   animations.css — Animaciones discretas y rápidas.
+   Se desactivan automáticamente con prefers-reduced-motion.
+   ========================================================================== */
+
+/* Entrada de tarjetas al cambiar de categoría / buscar */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+.menu.animate-in .card {
+  animation: card-in .38s cubic-bezier(.22, .8, .3, 1) both;
+  animation-delay: calc(min(var(--i, 0), 12) * 35ms);
+}
+
+@keyframes head-in {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+.menu.animate-in .cat-head { animation: head-in .35s ease-out both; }
+.menu.animate-in .cat-banner { animation: card-in .4s ease-out both; }
+
+/* Al agregar un producto: la tarjeta "late" y el botón flotante rebota */
+@keyframes card-pulse {
+  0% { transform: scale(1); box-shadow: var(--shadow-sm); }
+  40% { transform: scale(1.035); box-shadow: 0 0 0 4px rgba(210, 8, 36, .28), var(--shadow-md); }
+  100% { transform: scale(1); box-shadow: var(--shadow-sm); }
+}
+.card.pulse { animation: card-pulse .45s ease-out; }
+
+@keyframes fab-bump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.14) rotate(-3deg); }
+  70% { transform: scale(.97); }
+  100% { transform: scale(1); }
+}
+.fab.bump { animation: fab-bump .5s ease-out; }
+
+/* Retroalimentación al cambiar cantidades */
+@keyframes qty-tick {
+  0% { transform: scale(1); color: inherit; }
+  40% { transform: scale(1.35); color: var(--red); }
+  100% { transform: scale(1); color: inherit; }
+}
+.qty.tick, .fab-count.tick, .card-qty-badge.tick { animation: qty-tick .35s ease-out; }
+
+@keyframes badge-pop {
+  from { transform: scale(.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.card.has-qty .card-qty-badge { animation: badge-pop .25s ease-out; }
+
+/* Líneas del carrito */
+@keyframes item-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: none; }
+}
+.cart-item.is-new { animation: item-in .3s ease-out; }
+
+@keyframes item-flash {
+  0% { background: rgba(210, 8, 36, .12); }
+  100% { background: transparent; }
+}
+.cart-item.changed { animation: item-flash .6s ease-out; }
+
+/* Opción elegida */
+@keyframes opt-pop {
+  0% { transform: scale(.96); }
+  60% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+.opt input:checked + .opt-box { animation: opt-pop .22s ease-out; }
+
+/* Chips */
+.chip[aria-pressed="true"] { animation: opt-pop .25s ease-out; }
+
+/* Línea de escaneo de la cámara (mesera) */
+@keyframes scan-move {
+  0% { top: 18%; }
+  50% { top: 80%; }
+  100% { top: 18%; }
+}
+.scan-line { animation: scan-move 2.4s ease-in-out infinite; }
+
+/* Aparición del ticket de la mesera */
+@keyframes ticket-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.ticket.enter { animation: ticket-in .35s ease-out; }
+
+/* Preferencia del sistema: reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: .001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scan-line { animation: none; top: 50%; }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Yama Wok · Lector de pedidos</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#d20824">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="staff-page">
+  <noscript>
+    <div class="noscript">Esta página necesita JavaScript para funcionar. / This page needs JavaScript to work.</div>
+  </noscript>
+
+  <header class="staff-hero">
+    <button type="button" class="lang-btn" id="lang-btn" data-action="lang" aria-label="Switch language to English"><span data-icon="languages" data-size="16"></span><span>English</span></button>
+    <div class="hero-inner">
+      <img class="hero-logo" id="staff-logo" src="assets/logo.png" alt="Yama Wok" width="900" height="364">
+      <div>
+        <h1 data-i18n="staff.title">Lector de pedidos</h1>
+        <p class="sub" data-i18n="staff.subtitle">Escanea el QR del cliente</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="staff-main">
+    <!-- Escáner -->
+    <section class="scanner" id="scanner">
+      <div class="video-wrap" id="video-wrap">
+        <video id="video" playsinline muted></video>
+        <div class="scan-frame" aria-hidden="true"></div>
+        <div class="scan-line" aria-hidden="true"></div>
+      </div>
+      <p class="scan-status" id="status" role="status" aria-live="polite"></p>
+      <div class="scan-actions">
+        <button type="button" class="btn btn-primary" id="btn-start" data-action="start"><span data-icon="camera" data-size="20"></span><span data-i18n="staff.start">Activar cámara</span></button>
+        <button type="button" class="btn btn-danger" id="btn-stop" data-action="stop" hidden><span data-icon="x" data-size="20"></span><span data-i18n="staff.stop">Detener cámara</span></button>
+        <button type="button" class="btn btn-ghost" id="btn-upload"><span data-icon="upload" data-size="20"></span><span data-i18n="staff.upload">Leer QR desde una imagen</span></button>
+        <input type="file" id="file-input" accept="image/*" class="sr-only" tabindex="-1">
+      </div>
+    </section>
+
+    <!-- Mensajes (errores, avisos) -->
+    <div id="messages"></div>
+
+    <!-- Pedido leído -->
+    <section id="result" hidden aria-live="polite"></section>
+
+    <p class="no-print" style="text-align:center;font-size:.8rem"><a href="index.html" data-i18n="staff.back">Ir a la carta</a></p>
+  </main>
+
+  <script src="js/config.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/icons.js" defer></script>
+  <!-- Librería de lectura QR local: jsQR 1.4.0 (Apache-2.0) -->
+  <script src="js/vendor/jsQR.js" defer></script>
+  <script src="js/order-qr.js" defer></script>
+  <script src="js/waitress.js" defer></script>
+</body>
+</html>
